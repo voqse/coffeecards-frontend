@@ -1,5 +1,5 @@
 # repeat-frontend
-A frontend for Repeat project written with Vue 3 in Vite.
+A frontend for [Repeat](https://repeat.voqse.com) project written with Vue 3 in Vite.
 
 ## Project Setup
 ```sh
