@@ -12,7 +12,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['**/vite.config.js', '**/.eslintrc.js', '**/postcss.config.js'],
+        devDependencies: ['**/vite.config.js', '**/.eslintrc.cjs', '**/postcss.config.js'],
         optionalDependencies: false,
       },
     ],
