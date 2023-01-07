@@ -1,7 +1,7 @@
 <script setup>
 import { useAuth } from '@/plugins/auth'
 
-const { logout, user } = useAuth()
+const auth = useAuth()
 </script>
 
 <template>
@@ -9,16 +9,16 @@ const { logout, user } = useAuth()
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <template v-if="!user.authenticated">
+        <template v-if="!auth.user.authenticated">
           <RouterLink to="/signin">Sign in</RouterLink>
           <RouterLink to="/signup">Sign up</RouterLink>
         </template>
         <RouterLink to="/decks">Decks</RouterLink>
         <RouterLink to="/cards">Cards</RouterLink>
-        <template v-if="user.authenticated">
-          <RouterLink to="/profile">{{ user.username }}</RouterLink>
+        <template v-if="auth.user.authenticated">
+          <RouterLink to="/profile">{{ auth.user.username }}</RouterLink>
           <RouterLink to="/settings">Settings</RouterLink>
-          <b @click="logout">Logout</b>
+          <b @click="auth.logout">Logout</b>
         </template>
       </nav>
     </div>

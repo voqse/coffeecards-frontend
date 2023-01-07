@@ -2,11 +2,17 @@ import { createApp } from 'vue'
 import App from '@/App.vue'
 import router from '@/router'
 import { createAuth } from '@/plugins/auth'
+import createUserService from '@/services/UserService'
 
 const app = createApp(App)
+const userService = createUserService()
 const auth = createAuth({
   router,
-  routes: { login: '/signin' },
+  userService,
+  routes: {
+    login: '/signin',
+    register: '/signup',
+  },
 })
 
 app.use(router)

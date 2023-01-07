@@ -60,7 +60,7 @@ const router = createRouter({
         auth: false,
       },
     },
-    // TODO: Redirect to 404 without touching path
+    // TODO: Redirect to the 404 without touching the path
     {
       path: '/:pathMatch(.*)',
       redirect: '/',

@@ -1,15 +1,10 @@
 import { inject, reactive } from 'vue'
 
 const authKey = Symbol(process.env.NODE_ENV !== 'production' ? 'auth' : '')
-const authStorageKey = 'auth.user'
 
 function createAuth(options) {
-  const { router, routes } = options
-
-  const user = reactive({
-    authenticated: !!window.localStorage.getItem(authStorageKey),
-    username: window.localStorage.getItem(authStorageKey),
-  })
+  const { router, routes, userService } = options
+  const reactiveUser = reactive({})
 
   function createLoginPath({ fullPath }) {
     return {
@@ -18,28 +13,28 @@ function createAuth(options) {
     }
   }
 
-  async function login(credentials) {
-    if (!credentials.username || !credentials.password) {
-      return
-    }
-
-    user.authenticated = true
-    user.username = credentials.username
-    window.localStorage.setItem(authStorageKey, credentials.username)
-    // Redirect to queried path or homepage
-    router.push({ path: router.currentRoute.value.query.redirect || '/' })
+  function redirectAfterLogin() {
+    const { query } = router.currentRoute.value
+    router.push({ path: query.redirect || '/' })
   }
 
-  async function logout() {
-    user.authenticated = false
-    window.localStorage.removeItem('auth')
-    // Redirect to login page with last path to redirect after
+  function redirectAfterLogout() {
     router.push(createLoginPath(router.currentRoute.value))
   }
 
+  async function login(credentials) {
+    const { user } = userService.login(credentials, redirectAfterLogin)
+    Object.assign(reactiveUser, user)
+  }
+
+  async function logout() {
+    const { user } = userService.logout(redirectAfterLogout)
+    Object.assign(reactiveUser, user)
+  }
+
   async function register(credentials) {
-    // console.log('Register', ...credentials)
-    return credentials
+    const { user } = userService.register(credentials, redirectAfterLogin)
+    Object.assign(reactiveUser, user)
   }
 
   // TODO: Check if nested routes needs to be handled
@@ -47,12 +42,12 @@ function createAuth(options) {
     const { auth } = to.meta
 
     // Redirect to the login page if not authenticated
-    if (auth && !user.authenticated && to.path !== routes.login) {
+    if (auth && !reactiveUser.authenticated && to.path !== routes.login) {
       return createLoginPath(to)
     }
 
     // Keep current route if the page is hidden from authenticated
-    if (!auth && user.authenticated) {
+    if (!auth && reactiveUser.authenticated) {
       return from.path
     }
 
@@ -60,7 +55,7 @@ function createAuth(options) {
   }
 
   return {
-    user,
+    user: reactiveUser,
     login,
     logout,
     register,
