@@ -6,34 +6,25 @@ function createAuth(options) {
   const { router, routes, userService } = options
   const reactiveUser = reactive({})
 
-  function createLoginPath({ fullPath }) {
+  function resolveLoginPath({ fullPath }) {
     return {
       path: routes.login,
       query: { redirect: fullPath !== '/' ? fullPath : undefined },
     }
   }
 
-  function redirectAfterLogin() {
+  // Go to redirect page
+  function toRedirect() {
     const { query } = router.currentRoute.value
     router.push({ path: query.redirect || '/' })
   }
 
-  function redirectAfterLogout() {
-    router.push(createLoginPath(router.currentRoute.value))
+  // Go to login page and attach redirect to previous page
+  function toLogin() {
+    router.push(resolveLoginPath(router.currentRoute.value))
   }
 
-  async function login(credentials) {
-    const { user } = userService.login(credentials, redirectAfterLogin)
-    Object.assign(reactiveUser, user)
-  }
-
-  async function logout() {
-    const { user } = userService.logout(redirectAfterLogout)
-    Object.assign(reactiveUser, user)
-  }
-
-  async function register(credentials) {
-    const { user } = userService.register(credentials, redirectAfterLogin)
+  function assign({ user }) {
     Object.assign(reactiveUser, user)
   }
 
@@ -43,7 +34,7 @@ function createAuth(options) {
 
     // Redirect to the login page if not authenticated
     if (auth && !reactiveUser.authenticated && to.path !== routes.login) {
-      return createLoginPath(to)
+      return resolveLoginPath(to)
     }
 
     // Keep current route if the page is hidden from authenticated
@@ -56,17 +47,20 @@ function createAuth(options) {
 
   return {
     user: reactiveUser,
-    login,
-    logout,
-    register,
+    login: userService.login,
+    logout: userService.logout,
+    register: userService.register,
     install(app) {
       const auth = this
 
-      // eslint-disable-next-line no-param-reassign
       app.config.globalProperties.$auth = auth
       app.provide(authKey, auth)
 
       router.beforeEach(handleRoute)
+
+      userService.on('login', assign, toRedirect)
+      userService.on('logout', assign, toLogin)
+      userService.on('register', assign, toRedirect)
     },
   }
 }
