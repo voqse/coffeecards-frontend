@@ -6,8 +6,8 @@ function createEventHandler() {
     return listeners[evt] || []
   }
 
-  function emit(evt, ...args) {
-    getListeners(evt).forEach((e) => e(...args))
+  function emit(evt) {
+    getListeners(evt).forEach((e) => e(evt))
     return self
   }
 

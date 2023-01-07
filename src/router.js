@@ -9,7 +9,7 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       meta: {
-        auth: true,
+        requireAuth: true,
       },
     },
     {
@@ -17,7 +17,7 @@ const router = createRouter({
       name: 'decks',
       component: () => import('@/views/DecksView.vue'),
       meta: {
-        auth: true,
+        requireAuth: true,
       },
     },
     {
@@ -25,7 +25,7 @@ const router = createRouter({
       name: 'cards',
       component: () => import('@/views/CardsView.vue'),
       meta: {
-        auth: true,
+        requireAuth: true,
       },
     },
     {
@@ -33,7 +33,7 @@ const router = createRouter({
       name: 'profile',
       component: () => import('@/views/ProfileView.vue'),
       meta: {
-        auth: true,
+        requireAuth: true,
       },
     },
     {
@@ -41,7 +41,7 @@ const router = createRouter({
       name: 'settings',
       component: () => import('@/views/SettingsView.vue'),
       meta: {
-        auth: true,
+        requireAuth: true,
       },
     },
     {
@@ -49,7 +49,7 @@ const router = createRouter({
       name: 'signin',
       component: () => import('@/views/SigninView.vue'),
       meta: {
-        auth: false,
+        requireAuth: false,
       },
     },
     {
@@ -57,7 +57,7 @@ const router = createRouter({
       name: 'signup',
       component: () => import('@/views/SignupView.vue'),
       meta: {
-        auth: false,
+        requireAuth: false,
       },
     },
     // TODO: Redirect to the 404 without touching the path

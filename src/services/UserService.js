@@ -22,7 +22,7 @@ function createUserService(options = {}) {
     user.authenticated = true
     user.username = credentials.username
     window.localStorage.setItem(storageKey, credentials.username)
-    emit('login', self)
+    emit('login')
 
     return self
   }
@@ -30,7 +30,7 @@ function createUserService(options = {}) {
   function logout() {
     user.authenticated = false
     window.localStorage.removeItem(storageKey)
-    emit('logout', self)
+    emit('logout')
 
     return self
   }
@@ -42,7 +42,7 @@ function createUserService(options = {}) {
 
     user.authenticated = true
     user.username = credentials.username
-    emit('register', self)
+    emit('register')
 
     return self
   }

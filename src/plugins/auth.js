@@ -4,7 +4,7 @@ const authKey = Symbol(process.env.NODE_ENV !== 'production' ? 'auth' : '')
 
 function createAuth(options) {
   const { router, routes, userService } = options
-  const reactiveUser = reactive({})
+  const reactiveUser = reactive({ ...userService.user })
 
   function resolveLoginPath({ fullPath }) {
     return {
@@ -24,21 +24,21 @@ function createAuth(options) {
     router.push(resolveLoginPath(router.currentRoute.value))
   }
 
-  function assign({ user }) {
-    Object.assign(reactiveUser, user)
+  function assignUser() {
+    Object.assign(reactiveUser, userService.user)
   }
 
   // TODO: Check if nested routes needs to be handled
   function handleRoute(to, from) {
-    const { auth } = to.meta
+    const { requireAuth } = to.meta
 
     // Redirect to the login page if not authenticated
-    if (auth && !reactiveUser.authenticated && to.path !== routes.login) {
+    if (requireAuth && !reactiveUser.authenticated && to.path !== routes.login) {
       return resolveLoginPath(to)
     }
 
     // Keep current route if the page is hidden from authenticated
-    if (!auth && reactiveUser.authenticated) {
+    if (!requireAuth && reactiveUser.authenticated) {
       return from.path
     }
 
@@ -58,9 +58,9 @@ function createAuth(options) {
 
       router.beforeEach(handleRoute)
 
-      userService.on('login', assign, toRedirect)
-      userService.on('logout', assign, toLogin)
-      userService.on('register', assign, toRedirect)
+      userService.on('login', assignUser, toRedirect)
+      userService.on('logout', assignUser, toLogin)
+      userService.on('register', assignUser, toRedirect)
     },
   }
 }
