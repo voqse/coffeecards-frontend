@@ -1,8 +1,8 @@
 /* eslint-disable no-use-before-define */
 import createEventHandler from '@/services/EventHandler'
 
-function createUserService() {
-  const storageKey = 'auth.user'
+function createUserService(options = {}) {
+  const { storageKey = 'auth' } = options
   const { on, emit } = createEventHandler()
 
   const user = {
