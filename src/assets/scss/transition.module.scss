@@ -1,6 +1,20 @@
-/* stylelint-disable selector-type-no-unknown, selector-pseudo-class-no-unknown */
+/* stylelint-disable selector-type-no-unknown, selector-pseudo-class-no-unknown, no-descending-specificity */
 $easing: cubic-bezier(0.22, 1, 0.36, 1);
 $translate: 1rem;
+
+.fade,
+.slideRight,
+.slideLeft {
+  position: relative;
+
+  &:global(-leave-active) {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+}
 
 .fade {
   &:global(-enter-active),
@@ -17,17 +31,15 @@ $translate: 1rem;
   }
 }
 
-.fade,
 .slideRight,
 .slideLeft {
-  position: relative;
-
+  &:global(-enter-active),
   &:global(-leave-active) {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
+    transition: transform 0.6s $easing, opacity 0.3s $easing;
+  }
+
+  &:global(-enter-active) {
+    transition-delay: 0.1s;
   }
 }
 
@@ -50,17 +62,5 @@ $translate: 1rem;
   &:global(-enter-from) {
     opacity: 0;
     transform: translate3d(-$translate, 0, 0);
-  }
-}
-
-.slideRight,
-.slideLeft {
-  &:global(-enter-active),
-  &:global(-leave-active) {
-    transition: transform 0.6s $easing, opacity 0.3s $easing;
-  }
-
-  &:global(-enter-active) {
-    transition-delay: 0.1s;
   }
 }
