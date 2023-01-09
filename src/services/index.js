@@ -1,4 +1,4 @@
-import createUserService from '@/services/UserService'
+import createUserService from './UserService'
 
 const userService = createUserService()
 

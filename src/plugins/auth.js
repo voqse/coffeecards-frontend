@@ -13,6 +13,10 @@ function createAuth(options) {
     }
   }
 
+  function assignUser() {
+    Object.assign(reactiveUser, userService.user)
+  }
+
   // Go to redirect page
   function toRedirect() {
     const { query } = router.currentRoute.value
@@ -22,10 +26,6 @@ function createAuth(options) {
   // Go to login page and attach redirect to previous page
   function toLogin() {
     router.push(resolveLoginPath(router.currentRoute.value))
-  }
-
-  function assignUser() {
-    Object.assign(reactiveUser, userService.user)
   }
 
   // TODO: Check if nested routes needs to be handled

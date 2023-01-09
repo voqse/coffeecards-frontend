@@ -1,9 +1,9 @@
 >= 0.5%
 last 2 major versions
 not dead
-Chrome >= 60
-Firefox >= 60
+Chrome >= 88
+Firefox >= 84
 Firefox ESR
-iOS >= 12
-Safari >= 12
+iOS >= 14
+Safari >= 14
 not Explorer <= 11

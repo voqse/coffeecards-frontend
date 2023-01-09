@@ -2,7 +2,10 @@ import { createApp } from 'vue'
 import App from '@/App.vue'
 import router from '@/router'
 import { createAuth } from '@/plugins/auth'
-import { userService } from '@/services/index'
+import { userService } from '@/services'
+
+import '@/utils/vhFix'
+import '@/assets/scss/generic.scss'
 
 const app = createApp(App)
 const auth = createAuth({
