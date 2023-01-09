@@ -7,7 +7,8 @@ $translate: 1rem;
 .slideLeft {
   position: relative;
 
-  &:global(-leave-active) {
+  &:global(-leave-active),
+  &LeaveActive {
     position: absolute;
     top: 0;
     width: 100%;
@@ -18,15 +19,19 @@ $translate: 1rem;
 
 .fade {
   &:global(-enter-active),
-  &:global(-leave-active) {
+  &:global(-leave-active),
+  &EnterActive,
+  &LeaveActive {
     transition: opacity 0.56s $easing;
   }
 
-  &:global(-enter-active) {
+  &:global(-enter-active),
+  &EnterActive {
     transition-delay: 0.14s;
   }
 
-  &:global(-enter-from) {
+  &:global(-enter-from),
+  &EnterFrom {
     opacity: 0;
   }
 }
@@ -34,32 +39,39 @@ $translate: 1rem;
 .slideRight,
 .slideLeft {
   &:global(-enter-active),
-  &:global(-leave-active) {
+  &:global(-leave-active),
+  &EnterActive,
+  &LeaveActive, {
     transition: transform 0.6s $easing, opacity 0.3s $easing;
   }
 
-  &:global(-enter-active) {
+  &:global(-enter-active),
+  &EnterActive {
     transition-delay: 0.1s;
   }
 }
 
 .slideRight {
-  &:global(-leave-active) {
+  &:global(-leave-active),
+  &LeaveActive {
     transform: translate3d(-$translate, 0, 0);
   }
 
-  &:global(-enter-from) {
+  &:global(-enter-from),
+  &EnterFrom {
     opacity: 0;
     transform: translate3d($translate, 0, 0);
   }
 }
 
 .slideLeft {
-  &:global(-leave-active) {
+  &:global(-leave-active),
+  &LeaveActive {
     transform: translate3d($translate, 0, 0);
   }
 
-  &:global(-enter-from) {
+  &:global(-enter-from),
+  &EnterFrom {
     opacity: 0;
     transform: translate3d(-$translate, 0, 0);
   }

@@ -20,12 +20,13 @@ function onLogin() {
     <h1>Sign in</h1>
     <input v-model="formData.username" type="text" />
     <input v-model="formData.password" type="password" />
-    <button @click="onLogin">Login</button>
+    <button @click="onLogin">Sign in</button>
   </div>
 </template>
 
 <style lang="scss" module>
 .wrapper {
+  justify-content: flex-end;
   padding-bottom: 2rem;
 }
 </style>

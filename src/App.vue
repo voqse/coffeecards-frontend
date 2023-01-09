@@ -8,7 +8,7 @@ import globalStyle from '@/assets/scss/global.module.scss'
 
   <div :class="[globalStyle.container, $style.content]">
     <RouterView v-slot="{ Component, route }">
-      <Transition :name="route.meta.transition" :mode="route.meta.transitionMode">
+      <Transition :name="route.meta.transition">
         <component :is="Component" :key="route.path" />
       </Transition>
     </RouterView>

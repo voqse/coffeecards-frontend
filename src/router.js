@@ -70,14 +70,17 @@ const router = createRouter({
 })
 
 router.afterEach((to, from) => {
-  const toDepth = to.path !== '/' ? to.path.split('/').length : 1
-  const fromDepth = from.path !== '/' ? from.path.split('/').length : 1
-  if (toDepth === fromDepth) {
-    to.meta.transition = transitionStyle.fade
-  } else if (toDepth < fromDepth) {
-    to.meta.transition = transitionStyle.slideLeft
-  } else {
-    to.meta.transition = transitionStyle.slideRight
+  if (from.name) {
+    const toDepth = to.path !== '/' ? to.path.split('/').length : 1
+    const fromDepth = from.path !== '/' ? from.path.split('/').length : 1
+
+    if (toDepth === fromDepth) {
+      to.meta.transition = transitionStyle.fade
+    } else if (toDepth < fromDepth) {
+      to.meta.transition = transitionStyle.slideLeft
+    } else {
+      to.meta.transition = transitionStyle.slideRight
+    }
   }
 })
 
