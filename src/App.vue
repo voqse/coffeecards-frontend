@@ -1,36 +1,26 @@
 <script setup>
-import { useAuth } from '@/plugins/auth'
-
-const auth = useAuth()
+import TheHeader from '@/components/TheHeader.vue'
+import globalStyle from '@/assets/scss/global.module.scss'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <template v-if="!auth.user.authenticated">
-          <RouterLink to="/signin">Sign in</RouterLink>
-          <RouterLink to="/signup">Sign up</RouterLink>
-        </template>
-        <RouterLink to="/decks">Decks</RouterLink>
-        <RouterLink to="/cards">Cards</RouterLink>
-        <template v-if="auth.user.authenticated">
-          <RouterLink to="/profile">{{ auth.user.username }}</RouterLink>
-          <RouterLink to="/settings">Settings</RouterLink>
-          <b @click="auth.logout">Logout</b>
-        </template>
-      </nav>
-    </div>
-  </header>
+  <TheHeader title="Header title" />
 
-  <RouterView />
+  <div :class="[globalStyle.container, $style.content]">
+    <RouterView v-slot="{ Component, route }">
+      <Transition :name="route.meta.transition" :mode="route.meta.transitionMode">
+        <component :is="Component" :key="route.path" />
+      </Transition>
+    </RouterView>
+  </div>
 </template>
 
 <style lang='scss' module>
-nav {
-  & > * + * {
-    margin-left: 0.5em;
-  }
+.content {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  height: 100%;
 }
 </style>

@@ -5,7 +5,7 @@ import { createAuth } from '@/plugins/auth'
 import { userService } from '@/services'
 
 import '@/utils/vhFix'
-import '@/assets/scss/generic.scss'
+import '@/assets/scss/global.scss'
 
 const app = createApp(App)
 const auth = createAuth({

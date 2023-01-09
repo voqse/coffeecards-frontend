@@ -4,6 +4,7 @@
 
 html {
   font-size: 100%;
+  background: var(--color-black);
 }
 
 body {
@@ -12,6 +13,8 @@ body {
   font-family: Poppins, sans-serif;
   font-weight: 400;
   line-height: 1.75;
+  color: var(--color-white);
+  background: var(--color-black);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -56,6 +59,24 @@ small {
 }
 
 #app {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  min-height: 100%;
   isolation: isolate;
+}
+
+input {
+  padding: 0.6563rem 1rem;
+  background: #141417;
+}
+
+button {
+  padding: 0.875rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #cddcdf;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  background: #6f17ff;
 }

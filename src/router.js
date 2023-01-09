@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import transitionStyle from '@/assets/scss/transition.module.scss'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -66,6 +67,18 @@ const router = createRouter({
       redirect: '/',
     },
   ],
+})
+
+router.afterEach((to, from) => {
+  const toDepth = to.path !== '/' ? to.path.split('/').length : 1
+  const fromDepth = from.path !== '/' ? from.path.split('/').length : 1
+  if (toDepth === fromDepth) {
+    to.meta.transition = transitionStyle.fade
+  } else if (toDepth < fromDepth) {
+    to.meta.transition = transitionStyle.slideLeft
+  } else {
+    to.meta.transition = transitionStyle.slideRight
+  }
 })
 
 export default router
