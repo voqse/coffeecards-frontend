@@ -1,6 +1,7 @@
 <script setup>
 import TheHeader from '@/components/TheHeader.vue'
 import globalStyle from '@/assets/scss/global.module.scss'
+import TheTransition from '@/components/TheTransition.vue'
 </script>
 
 <template>
@@ -8,9 +9,9 @@ import globalStyle from '@/assets/scss/global.module.scss'
 
   <div :class="[globalStyle.container, $style.content]">
     <RouterView v-slot="{ Component, route }">
-      <Transition :name="route.meta.transition">
+      <TheTransition :name="route.meta.transition">
         <component :is="Component" :key="route.path" />
-      </Transition>
+      </TheTransition>
     </RouterView>
   </div>
 </template>
