@@ -4,8 +4,6 @@ $translate: 1rem;
 .fade,
 .slideRight,
 .slideLeft {
-  position: relative;
-
   &LeaveActive {
     position: absolute;
     top: 0;
@@ -44,22 +42,22 @@ $translate: 1rem;
 
 .slideRight {
   &LeaveActive {
-    transform: translate3d(-$translate, 0, 0);
+    transform: translate3d($translate, 0, 0);
   }
 
   &EnterFrom {
     opacity: 0;
-    transform: translate3d($translate, 0, 0);
+    transform: translate3d(-$translate, 0, 0);
   }
 }
 
 .slideLeft {
   &LeaveActive {
-    transform: translate3d($translate, 0, 0);
+    transform: translate3d(-$translate, 0, 0);
   }
 
   &EnterFrom {
     opacity: 0;
-    transform: translate3d(-$translate, 0, 0);
+    transform: translate3d($translate, 0, 0);
   }
 }

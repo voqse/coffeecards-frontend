@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import globalStyle from '@/assets/scss/global.module.scss'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -66,6 +67,8 @@ const router = createRouter({
       redirect: '/',
     },
   ],
+  linkActiveClass: globalStyle.linkActive,
+  linkExactActiveClass: globalStyle.linkExactActive,
 })
 
 router.afterEach((to, from) => {
@@ -76,9 +79,9 @@ router.afterEach((to, from) => {
     if (toDepth === fromDepth) {
       to.meta.transition = 'fade'
     } else if (toDepth < fromDepth) {
-      to.meta.transition = 'slideLeft'
-    } else {
       to.meta.transition = 'slideRight'
+    } else {
+      to.meta.transition = 'slideLeft'
     }
   }
 })

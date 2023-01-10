@@ -3,7 +3,9 @@ import globalStyle from '@/assets/scss/global.module.scss'
 </script>
 
 <template>
-  <div :class="globalStyle.content">
-    <h1>Decks</h1>
+  <div :class="globalStyle.wrapper">
+    <div :class="globalStyle.container">
+      <h1>Decks</h1>
+    </div>
   </div>
 </template>

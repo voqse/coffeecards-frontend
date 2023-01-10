@@ -2,29 +2,43 @@
 import globalStyle from '@/assets/scss/global.module.scss'
 import { useAuth } from '@/plugins/auth'
 
+const props = defineProps({
+  title: {
+    type: String,
+    default: null,
+  },
+})
 const auth = useAuth()
 </script>
 
 <template>
-  <header :class="globalStyle.container">
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <template v-if="!auth.user.authenticated">
-        <RouterLink to="/signin">Sign in</RouterLink>
-        <RouterLink to="/signup">Sign up</RouterLink>
-      </template>
-      <RouterLink to="/decks">Decks</RouterLink>
-      <RouterLink to="/cards">Cards</RouterLink>
-      <template v-if="auth.user.authenticated">
-        <RouterLink to="/profile">{{ auth.user.username }}</RouterLink>
-        <RouterLink to="/settings">Settings</RouterLink>
-        <b @click="auth.logout">Logout</b>
-      </template>
-    </nav>
-  </header>
+  <div :class="[globalStyle.wrapper]">
+    <div :class="$style.header">
+      <header :class="globalStyle.container">
+        <nav>
+          <RouterLink to="/">Home</RouterLink>
+          <template v-if="!auth.user.authenticated">
+            <RouterLink to="/signin">Sign in</RouterLink>
+            <RouterLink to="/signup">Sign up</RouterLink>
+          </template>
+          <RouterLink to="/decks">Decks</RouterLink>
+          <RouterLink to="/cards">Cards</RouterLink>
+          <template v-if="auth.user.authenticated">
+            <RouterLink to="/profile">{{ auth.user.username }}</RouterLink>
+            <RouterLink to="/settings">Settings</RouterLink>
+            <RouterLink to="/logout">Logout</RouterLink>
+          </template>
+        </nav>
+      </header>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" module>
+.header {
+  overflow-x: auto;
+}
+
 nav {
   display: flex;
 
@@ -32,6 +46,7 @@ nav {
     display: block;
     flex: 1 0 auto;
     padding: 0.75rem 0.5rem;
+    color: var(--color-text-dimmed);
     text-align: center;
   }
 }

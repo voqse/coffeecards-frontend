@@ -1,13 +1,11 @@
 <script setup>
 import TheHeader from '@/components/TheHeader.vue'
-import globalStyle from '@/assets/scss/global.module.scss'
 import TheTransition from '@/components/TheTransition.vue'
 </script>
 
 <template>
   <TheHeader title="Header title" />
-
-  <div :class="[globalStyle.container, $style.content]">
+  <div :class="$style.content">
     <RouterView v-slot="{ Component, route }">
       <TheTransition :name="route.meta.transition">
         <component :is="Component" :key="route.path" />
@@ -21,7 +19,8 @@ import TheTransition from '@/components/TheTransition.vue'
   position: relative;
   display: flex;
   flex: 1 0 auto;
-  flex-direction: column;
-  height: 100%;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden;
 }
 </style>

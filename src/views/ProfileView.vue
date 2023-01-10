@@ -6,7 +6,9 @@ const { user } = useAuth()
 </script>
 
 <template>
-  <div :class="globalStyle.content">
-    <h1>{{ `${user.username}'s Profile` }}</h1>
+  <div :class="globalStyle.wrapper">
+    <div :class="globalStyle.container">
+      <h1>{{ `${user.username}'s Profile` }}</h1>
+    </div>
   </div>
 </template>

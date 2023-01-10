@@ -23,11 +23,6 @@ function createAuth(options) {
     router.push({ path: query.redirect || '/' })
   }
 
-  // Go to login page and attach redirect to previous page
-  function toLogin() {
-    router.push(resolveLoginPath(router.currentRoute.value))
-  }
-
   // TODO: Check if nested routes needs to be handled
   function handleRoute(to, from) {
     const { requireAuth } = to.meta
@@ -57,9 +52,20 @@ function createAuth(options) {
       app.provide(authKey, auth)
 
       router.beforeEach(handleRoute)
+      router.addRoute({
+        path: '/logout',
+        name: 'logout',
+        beforeEnter: (to, from) => {
+          userService.logout()
+          return resolveLoginPath(from)
+        },
+        meta: {
+          requireAuth: true,
+        },
+      })
 
       userService.on('login', assignUser, toRedirect)
-      userService.on('logout', assignUser, toLogin)
+      userService.on('logout', assignUser)
       userService.on('register', assignUser, toRedirect)
     },
   }
