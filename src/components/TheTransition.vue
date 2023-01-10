@@ -4,7 +4,7 @@ import transitionStyle from '@/assets/scss/transition.module.scss'
 const props = defineProps({
   name: {
     type: String,
-    default: 'fade',
+    default: null,
   },
 })
 
