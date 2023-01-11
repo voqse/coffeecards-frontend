@@ -1,5 +1,5 @@
 <script setup>
-import { useAuth } from '@/plugins/auth'
+import { useAuth } from '@/plugins/authPlugin'
 import globalStyle from '@/assets/scss/global.module.scss'
 
 const { user } = useAuth()

@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import createEventHandler from '@/services/EventHandler'
+import createEventHandler from './EventHandler'
 
 function validateCredentials(credentials) {
   return (credentials.login || credentials.username || credentials.email) && credentials.password

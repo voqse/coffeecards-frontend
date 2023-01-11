@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import { useAuth } from '@/plugins/auth'
+import { useAuth } from '@/plugins/authPlugin'
 import useEvent from '@/use/event'
 
 import BaseInput from '@/components/BaseInput.vue'

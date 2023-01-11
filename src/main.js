@@ -1,8 +1,9 @@
 import { createApp } from 'vue'
 import App from '@/App.vue'
 import router from '@/router'
-import { createAuth } from '@/plugins/auth'
-import { userService } from '@/services'
+import { createAuth } from '@/plugins/authPlugin'
+import { createServices } from '@/plugins/servicesPlugin'
+import { userService, contentService } from '@/services'
 
 import '@/utils/vhFix'
 import '@/assets/scss/global.scss'
@@ -14,9 +15,17 @@ const auth = createAuth({
   routes: {
     login: '/signin',
     register: '/signup',
+    logout: '/logout',
+  },
+})
+const services = createServices({
+  services: {
+    userService,
+    contentService,
   },
 })
 
 app.use(router)
 app.use(auth)
+app.use(services)
 app.mount('#app')

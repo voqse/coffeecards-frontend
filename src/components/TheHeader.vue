@@ -1,8 +1,8 @@
 <script setup>
 import globalStyle from '@/assets/scss/global.module.scss'
-import { useAuth } from '@/plugins/auth'
+import { useAuth } from '@/plugins/authPlugin'
 
-const props = defineProps({
+defineProps({
   title: {
     type: String,
     default: null,

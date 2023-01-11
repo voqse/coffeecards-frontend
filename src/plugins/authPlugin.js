@@ -46,14 +46,14 @@ function createAuth(options) {
     logout: userService.logout,
     register: userService.register,
     install(app) {
-      const auth = this
+      const self = this
 
-      app.config.globalProperties.$auth = auth
-      app.provide(authKey, auth)
+      app.config.globalProperties.$auth = self
+      app.provide(authKey, self)
 
       router.beforeEach(handleRoute)
       router.addRoute({
-        path: '/logout',
+        path: routes.logout,
         name: 'logout',
         beforeEnter: (to, from) => {
           userService.logout()
