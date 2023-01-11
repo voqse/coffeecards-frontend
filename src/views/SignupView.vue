@@ -3,6 +3,13 @@ import globalStyle from '@/assets/scss/global.module.scss'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseCheckbox from '@/components/BaseCheckbox.vue'
+import { onBeforeMount } from 'vue'
+
+const emit = defineEmits(['update:page'])
+
+onBeforeMount(() => {
+  emit('update:page', { title: 'Sign up' })
+})
 </script>
 
 <template>

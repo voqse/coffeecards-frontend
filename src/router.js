@@ -14,7 +14,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/decks',
+      path: '/:collectionId',
       name: 'decks',
       component: () => import('@/views/DecksView.vue'),
       meta: {
@@ -22,7 +22,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/cards',
+      path: '/:collectionId/:deckId',
       name: 'cards',
       component: () => import('@/views/CardsView.vue'),
       meta: {

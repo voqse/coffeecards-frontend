@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { onBeforeMount, reactive, ref } from 'vue'
 import { useAuth } from '@/plugins/authPlugin'
 import useEvent from '@/use/event'
 
@@ -10,9 +10,11 @@ import BaseCheckbox from '@/components/BaseCheckbox.vue'
 import globalStyle from '@/assets/scss/global.module.scss'
 import inputsStyle from '@/assets/scss/inputs.module.scss'
 
+const emit = defineEmits(['update:page'])
 const { login } = useAuth()
 const loginRef = ref(null)
 const passwordRef = ref(null)
+
 const formData = reactive({
   login: null,
   password: null,
@@ -41,6 +43,10 @@ useEvent(
   },
   true
 )
+
+onBeforeMount(() => {
+  emit('update:page', { title: 'Sign in' })
+})
 </script>
 
 <template>
