@@ -17,10 +17,6 @@ const auth = useAuth()
       <header :class="globalStyle.container">
         <nav>
           <RouterLink to="/">Home</RouterLink>
-          <template v-if="!auth.user.authenticated">
-            <RouterLink to="/signin">Sign in</RouterLink>
-            <RouterLink to="/signup">Sign up</RouterLink>
-          </template>
           <RouterLink to="/decks">Decks</RouterLink>
           <RouterLink to="/cards">Cards</RouterLink>
           <template v-if="auth.user.authenticated">

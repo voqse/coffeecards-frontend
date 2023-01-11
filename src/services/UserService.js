@@ -1,17 +1,18 @@
 /* eslint-disable no-use-before-define */
 import createEventHandler from '@/services/EventHandler'
 
-export default function createUserService(options) {
+function validateCredentials(credentials) {
+  return (credentials.login || credentials.username || credentials.email) && credentials.password
+}
+
+function createUserService(options) {
   const { storageKey = 'auth' } = options || {}
   const { on, emit } = createEventHandler()
 
   const user = {
     authenticated: !!window.localStorage.getItem(storageKey),
     username: window.localStorage.getItem(storageKey),
-  }
-
-  function validateCredentials(credentials) {
-    return credentials.username && credentials.password
+    email: null,
   }
 
   function login(credentials) {
@@ -20,8 +21,8 @@ export default function createUserService(options) {
     }
 
     user.authenticated = true
-    user.username = credentials.username
-    window.localStorage.setItem(storageKey, credentials.username)
+    user.username = credentials.login
+    window.localStorage.setItem(storageKey, credentials.login)
     emit('login')
 
     return self
@@ -42,6 +43,7 @@ export default function createUserService(options) {
 
     user.authenticated = true
     user.username = credentials.username
+    user.email = credentials.email
     emit('register')
 
     return self
@@ -57,3 +59,5 @@ export default function createUserService(options) {
 
   return self
 }
+
+export { createUserService, validateCredentials }

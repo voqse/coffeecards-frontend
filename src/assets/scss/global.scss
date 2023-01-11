@@ -57,25 +57,42 @@ small {
   font-size: 0.8rem;
 }
 
+a {
+  color: var(--color-text-link);
+
+  &:focus,
+  &:hover {
+    color: var(--color-text-link-highlited);
+  }
+}
+
+input,
+button {
+  border-radius: 3rem;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 0.4375rem 1rem;
+  background: #141417;
+  border: 3px solid transparent;
+}
+
+button {
+  padding: 0.84375rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #cddcdf;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  background: var(--color-accent);
+}
+
 #app {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   min-height: 100%;
   isolation: isolate;
-}
-
-input {
-  padding: 0.6563rem 1rem;
-  background: #141417;
-}
-
-button {
-  padding: 0.875rem 1rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #cddcdf;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  background: #6f17ff;
 }

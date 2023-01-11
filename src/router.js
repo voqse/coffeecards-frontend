@@ -73,12 +73,14 @@ const router = createRouter({
 
 router.afterEach((to, from) => {
   if (from.name) {
-    const toDepth = to.path !== '/' ? to.path.split('/').length : 1
-    const fromDepth = from.path !== '/' ? from.path.split('/').length : 1
+    const toDepth = to.path.split('/').length
+    const fromDepth = from.path.split('/').length
+    const fromLogin = from.path === '/signin' || from.path === '/signup'
+    const toLogin = to.path === '/signin'
 
-    if (toDepth === fromDepth) {
+    if (!toLogin && !fromLogin && toDepth === fromDepth) {
       to.meta.transition = 'fade'
-    } else if (toDepth < fromDepth) {
+    } else if (toLogin || toDepth < fromDepth) {
       to.meta.transition = 'slideRight'
     } else {
       to.meta.transition = 'slideLeft'

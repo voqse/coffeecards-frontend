@@ -1,5 +1,5 @@
 <script setup>
-import transitionStyle from '@/assets/scss/transition.module.scss'
+import transitionsStyle from '@/assets/scss/transitions.module.scss'
 
 const props = defineProps({
   name: {
@@ -21,19 +21,19 @@ function createClassList(enterFromClass, enterActiveClass, leaveActiveClass) {
 
 const transitions = {
   fade: createClassList(
-    transitionStyle.fadeEnterFrom,
-    transitionStyle.fadeEnterActive,
-    transitionStyle.fadeLeaveActive
+    transitionsStyle.fadeEnterFrom,
+    transitionsStyle.fadeEnterActive,
+    transitionsStyle.fadeLeaveActive
   ),
   slideRight: createClassList(
-    transitionStyle.slideRightEnterFrom,
-    transitionStyle.slideRightEnterActive,
-    transitionStyle.slideRightLeaveActive
+    transitionsStyle.slideRightEnterFrom,
+    transitionsStyle.slideRightEnterActive,
+    transitionsStyle.slideRightLeaveActive
   ),
   slideLeft: createClassList(
-    transitionStyle.slideLeftEnterFrom,
-    transitionStyle.slideLeftEnterActive,
-    transitionStyle.slideLeftLeaveActive
+    transitionsStyle.slideLeftEnterFrom,
+    transitionsStyle.slideLeftEnterActive,
+    transitionsStyle.slideLeftLeaveActive
   ),
 }
 </script>
