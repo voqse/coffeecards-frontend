@@ -19,7 +19,7 @@ defineProps({
 const { user } = useAuth()
 const router = useRouter()
 const route = useRoute()
-const isChildRoute = computed(() => route.path.split('/').length > 2)
+const isChildRoute = computed(() => route.path !== '/' && route.path !== '/signin' && route.path !== '/signup')
 
 function goBack() {
   const path = route.path.split('/').slice(0, -1).join('/') || '/'
@@ -28,22 +28,22 @@ function goBack() {
 </script>
 
 <template>
-  <div :class="[globalStyle.wrapper]">
-    <header :class="[globalStyle.container, $style.header]">
-      <BaseButton v-if="isChildRoute" :class="$style.backButton" @click="goBack"><BackIcon /></BaseButton>
-      <div :class="$style.title">
-        <slot />
-      </div>
-      <RouterLink to="/logout">
-        <BaseButton v-if="user.authenticated" :class="$style.menuButton"><MenuIcon /></BaseButton>
-      </RouterLink>
-    </header>
-  </div>
+  <header :class="[globalStyle.container, $style.header]">
+    <BaseButton v-if="isChildRoute" :class="$style.backButton" @click="goBack"><BackIcon /></BaseButton>
+    <div :key="route.path" :class="$style.title">
+      <slot />
+    </div>
+    <RouterLink to="/logout">
+      <BaseButton v-if="user.authenticated" :class="$style.menuButton"><MenuIcon /></BaseButton>
+    </RouterLink>
+  </header>
 </template>
 
 <style lang="scss" module>
 .header {
   display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
   align-items: center;
   height: 4rem;
   font-size: 1.125rem;
@@ -64,6 +64,10 @@ function goBack() {
   height: 3rem;
   color: var(--color-text-button);
   background-color: var(--color-element-button);
+
+  svg {
+    flex: 0 0 auto;
+  }
 }
 
 .backButton {

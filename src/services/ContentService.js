@@ -64,8 +64,8 @@ const fakeCollections = [
 function createContentService(options) {
   const { on, emit } = createEventHandler()
 
-  function getCollections() {
-    return fakeCollections
+  function getCollections(id) {
+    return id ? fakeCollections.find((collection) => collection.id === id) : fakeCollections
   }
 
   function getDecks(collectionId) {

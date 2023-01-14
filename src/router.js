@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import DecksView from '@/views/DecksView.vue'
 import globalStyle from '@/assets/scss/global.module.scss'
 
 const router = createRouter({
@@ -8,21 +8,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: DecksView,
       meta: {
         requireAuth: true,
       },
     },
     {
-      path: '/:collectionId',
-      name: 'decks',
-      component: () => import('@/views/DecksView.vue'),
-      meta: {
-        requireAuth: true,
-      },
-    },
-    {
-      path: '/:collectionId/:deckId',
+      path: '/:deckId',
       name: 'cards',
       component: () => import('@/views/CardsView.vue'),
       meta: {
@@ -73,17 +65,17 @@ const router = createRouter({
 
 router.afterEach((to, from) => {
   if (from.name) {
-    const toDepth = to.path.split('/').length
-    const fromDepth = from.path.split('/').length
-    const fromLogin = from.path === '/signin' || from.path === '/signup'
-    const toLogin = to.path === '/signin'
+    const toDepth = from.path === '/' ? to.path.split('/').length : 1
+    const fromDepth = to.path === '/' ? from.path.split('/').length : 1
+    const toLogin = to.path === '/signin' || to.path === '/signup'
+    const fromLogin = from.path === '/signin'
 
-    if (!toLogin && !fromLogin && toDepth === fromDepth) {
-      to.meta.transition = 'fade'
-    } else if (toLogin || toDepth < fromDepth) {
-      to.meta.transition = 'slideRight'
+    if (fromLogin || (!toLogin && toDepth > fromDepth)) {
+      to.meta.transition = 'slideIn'
+    } else if (toLogin || (!toLogin && toDepth < fromDepth)) {
+      to.meta.transition = 'slideOut'
     } else {
-      to.meta.transition = 'slideLeft'
+      to.meta.transition = 'fade'
     }
   }
 })

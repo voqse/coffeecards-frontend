@@ -1,16 +1,16 @@
 <script setup>
-import { onBeforeMount, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useAuth } from '@/plugins/authPlugin'
 import useEvent from '@/use/event'
 
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
-import BaseCheckbox from '@/components/BaseCheckbox.vue'
 
+import BaseCheckbox from '@/components/BaseCheckbox.vue'
 import globalStyle from '@/assets/scss/global.module.scss'
 import inputsStyle from '@/assets/scss/inputs.module.scss'
+import TheHeader from '@/components/TheHeader.vue'
 
-const emit = defineEmits(['update:page'])
 const { login } = useAuth()
 const loginRef = ref(null)
 const passwordRef = ref(null)
@@ -43,14 +43,11 @@ useEvent(
   },
   true
 )
-
-onBeforeMount(() => {
-  emit('update:page', { title: 'Sign in' })
-})
 </script>
 
 <template>
   <div :class="globalStyle.wrapper">
+    <TheHeader>Sign in</TheHeader>
     <div :class="[globalStyle.container, $style.centered]">
       <form @submit.prevent="onSubmit">
         <BaseInput ref="loginRef" v-model="formData.login" type="text">Email or Username</BaseInput>
@@ -68,8 +65,6 @@ onBeforeMount(() => {
 
 <style lang="scss" module>
 .centered {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   max-width: 25rem;
 }

@@ -3,17 +3,12 @@ import globalStyle from '@/assets/scss/global.module.scss'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseCheckbox from '@/components/BaseCheckbox.vue'
-import { onBeforeMount } from 'vue'
-
-const emit = defineEmits(['update:page'])
-
-onBeforeMount(() => {
-  emit('update:page', { title: 'Sign up' })
-})
+import TheHeader from '@/components/TheHeader.vue'
 </script>
 
 <template>
   <div :class="globalStyle.wrapper">
+    <TheHeader>Sign up</TheHeader>
     <div :class="[globalStyle.container, $style.centered]">
       <form>
         <BaseInput type="email">Email</BaseInput>
@@ -33,8 +28,6 @@ onBeforeMount(() => {
 
 <style lang="scss" module>
 .centered {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   max-width: 25rem;
 }

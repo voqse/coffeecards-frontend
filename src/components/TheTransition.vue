@@ -20,20 +20,25 @@ function createClassList(enterFromClass, enterActiveClass, leaveActiveClass) {
 }
 
 const transitions = {
+  fadeOverlay: createClassList(
+    transitionsStyle.fadeOverlayEnterFrom,
+    transitionsStyle.fadeOverlayEnterActive,
+    transitionsStyle.fadeOverlayLeaveActive
+  ),
   fade: createClassList(
     transitionsStyle.fadeEnterFrom,
     transitionsStyle.fadeEnterActive,
     transitionsStyle.fadeLeaveActive
   ),
-  slideRight: createClassList(
-    transitionsStyle.slideRightEnterFrom,
-    transitionsStyle.slideRightEnterActive,
-    transitionsStyle.slideRightLeaveActive
+  slideOut: createClassList(
+    transitionsStyle.slideOutEnterFrom,
+    transitionsStyle.slideOutEnterActive,
+    transitionsStyle.slideOutLeaveActive
   ),
-  slideLeft: createClassList(
-    transitionsStyle.slideLeftEnterFrom,
-    transitionsStyle.slideLeftEnterActive,
-    transitionsStyle.slideLeftLeaveActive
+  slideIn: createClassList(
+    transitionsStyle.slideInEnterFrom,
+    transitionsStyle.slideInEnterActive,
+    transitionsStyle.slideInLeaveActive
   ),
 }
 </script>
