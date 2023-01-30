@@ -33,8 +33,8 @@ function goBack() {
     <div :key="route.path" :class="$style.title">
       <slot />
     </div>
-    <RouterLink to="/logout">
-      <BaseButton v-if="user.authenticated" :class="$style.menuButton"><MenuIcon /></BaseButton>
+    <RouterLink v-if="user.authenticated" to="/logout">
+      <BaseButton :class="$style.menuButton"><MenuIcon /></BaseButton>
     </RouterLink>
   </header>
 </template>

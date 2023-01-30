@@ -21,7 +21,10 @@ import TheHeader from '@/components/TheHeader.vue'
         </BaseCheckbox>
         <BaseButton :class="$style.submit" type="submit">Sign up</BaseButton>
       </form>
-      <div :class="$style.switch">Already have an&nbsp;account? <RouterLink to="/signin">Sign in</RouterLink></div>
+      <div :class="$style.switch">
+        Already have an&nbsp;account?
+        <RouterLink to="/signin">Sign in</RouterLink>
+      </div>
     </div>
   </div>
 </template>
