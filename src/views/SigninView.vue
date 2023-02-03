@@ -5,11 +5,11 @@ import useEvent from '@/use/event'
 
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
-
 import BaseCheckbox from '@/components/BaseCheckbox.vue'
+import TheHeader from '@/components/TheHeader.vue'
+
 import globalStyle from '@/assets/scss/global.module.scss'
 import inputsStyle from '@/assets/scss/inputs.module.scss'
-import TheHeader from '@/components/TheHeader.vue'
 
 const { login } = useAuth()
 const loginRef = ref(null)
@@ -58,7 +58,10 @@ useEvent(
         </div>
         <BaseButton :class="$style.submit" type="submit">Sign in</BaseButton>
       </form>
-      <div :class="$style.switch">Don't have an&nbsp;account? <RouterLink to="/signup">Sign up</RouterLink></div>
+      <div :class="$style.switch">
+        Don't have an&nbsp;account?
+        <RouterLink to="/signup">Sign up</RouterLink>
+      </div>
     </div>
   </div>
 </template>

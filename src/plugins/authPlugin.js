@@ -3,7 +3,7 @@ import { inject, reactive } from 'vue'
 const authKey = Symbol(process.env.NODE_ENV !== 'production' ? 'auth' : '')
 
 function createAuth(options) {
-  const { router, routes, userService } = options
+  const { router, routes, userService } = options || {}
   const reactiveUser = reactive({ ...userService.user })
 
   function resolveLoginPath({ fullPath }) {
